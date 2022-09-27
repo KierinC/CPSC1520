@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - Event Handler Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/product.css">
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <header class="page-header">
+        <h1 class="page-header__heading">Grinding Gears</h1>
+        <div class="cart-count">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count__number js-cart-count">(0)</span>
+        </div>
+    </header>
+    <div class="main__container">
+        <main>
+            <section class="product">
+                <div class="product__images">
+                    <img class="product__image" src="img/sprocket.jpg" alt="A Sprocket">
+                    <div class="product__thumbnails">
+                        <a href="img/sprocket.jpg" class="product__thumbnail__link">
+                            <img class="product__thumbnail" src="img/sprocket.jpg" alt="Gear 1">
+                        </a>
+                        <a href="img/sprocket-1.jpg" class="product__thumbnail__link">
+                            <img class="product__thumbnail" src="img/sprocket-1.jpg" alt="Gear 2">
+                        </a>
+                        <a href="img/sprocket-2.jpg" class="product__thumbnail__link">
+                            <img class="product__thumbnail" src="img/sprocket-2.jpg" alt="Gear 3">
+                        </a>
+                        <a href="img/sprocket-3.jpg" class="product__thumbnail__link">
+                            <img class="product__thumbnail" src="img/sprocket-3.jpg" alt="Gear 4">
+                        </a>
+                    </div>
+                </div>
+                <div class="product__details">
+                    <h2 class="product__title">Mighty Cog</h2>
+                    <p class="product__brand">Gears-X</p>
+                    <p class="product__price">$299.95</p>
+
+                    <section class="product__quantity">
+                        <h3 class="product__quantity__heading">Quantity</h3>
+                        <form action="" class="form js-quantity-form">
+                            <input type="text" class="form__input" name="quantity" id="quantity" value="0">
+                            <button class="form__button form__button--submit" type="submit">Add to Cart</button>
+                            <p class="error"></p>
+                        </form>
+                    </section>
+                </div>
+                <section class="product__description">
+                    <h3 class="product__description__heading">Description</h3>
+                    <p class="product__description__text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, animi? Qui eveniet commodi
+                        distinctio aut est ad tempore nihil aliquid veniam fugit! Magni exercitationem neque molestias
+                        velit facilis ab repellendus.
+                    </p>
+                </section>
+            </section>
+        </main>
+    </div>
+
+</body>
+
+</html>
