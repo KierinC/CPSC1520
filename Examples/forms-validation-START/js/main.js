@@ -20,9 +20,6 @@
   let budgetList = document.querySelector('.current-budget');
   let budgetTotalElement = document.querySelector('#budget-total');
 
-  //TODO: validate the values
-  
-
   // create a variable to hold the running budget total
   let runningBudgetTotal = 0;
 
@@ -33,21 +30,54 @@
   budgetFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    let budgetItemTitle = evt.target.elements['budget-title'].value;
-    let itemAmount = parseFloat(evt.target.elements['amount'].value);
-    let itemDescription = evt.target.elements['budget-description'].value;
+    let titleElement = evt.target.elements['budget-title'];
+    let amountElement = evt.target.elements['amount'];
+    let descriptionElement = evt.target.elements['budget-description'];
 
-    // Add item to list
-    AddBudgetItem(budgetItemTitle, itemAmount, itemDescription);
+    let titleValue = evt.target.elements['budget-title'].value;
+    let amountValue = parseFloat(evt.target.elements['amount'].value);
+    let descriptionValue = evt.target.elements['budget-description'].value;
 
-    // Clear form
-    budgetFormElement.reset();
+    // form validation
+    let isFormValid = true;
 
-    // Focus on first element again
-    budgetFormElement.elements['budget-title'].focus();
+    if (!isTextNotEmpty(titleValue)) {
+      isFormValid = false;
 
-    // Update budget total
-    UpdateTotal(itemAmount);
+      titleElement.classList.add("is-invalid");
+    } else {
+      titleElement.classList.remove("is-invalid");
+    }
+
+    if (!isGreaterThanZero(amountValue)) {
+      isFormValid = false;
+
+      amountElement.classList.add('is-invalid');
+    } else {
+      amountElement.classList.remove("is-invalid");
+    }
+
+    if (!isTextNotEmpty(descriptionValue)) {
+      isFormValid = false;
+
+      descriptionElement.classList.add('is-invalid');
+    } else {
+      descriptionElement.classList.remove("is-invalid");
+    }
+
+    if (isFormValid) {
+      // Add item to list
+      AddBudgetItem(titleValue, amountValue, descriptionValue);
+      
+      // Clear form
+      budgetFormElement.reset();
+      
+      // Focus on first element again
+      budgetFormElement.elements['budget-title'].focus();
+      
+      // Update budget total
+      UpdateTotal(amountValue);
+    }
   });
 
 // function to add a budget item
@@ -67,6 +97,28 @@ function UpdateTotal(amount) {
 // function for general currency formatter
 function FormatMoney(number) {
   return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(number);
+}
+
+// function to determine if field is not empty
+function isTextNotEmpty (value) {
+  let valid = false;
+
+  if (value.length > 0) {
+    valid = true;
+  }
+
+  return valid;
+}
+
+// function to determine if a number is positive
+function isGreaterThanZero (value) {
+  let valid = false;
+
+  if (value > 0) {
+    valid = true;
+  }
+
+  return valid;
 }
 
 })();
