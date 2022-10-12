@@ -1,5 +1,31 @@
 // wrap everything in an IIFE
-const USER = 'Your name';
+
+(function () {
+    const USER = 'Your name';
+    let formElement = document.querySelector('.cheep-form');
+
+    console.log('.js file linked');
+
+    formElement.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+
+        let cheeptextElement = evt.target.elements['cheep-text'];
+        let cheepgifElement = evt.target.elements['cheep-gif'];
+
+        
+    });
+
+    // function to determine if field is not empty
+    function isTextNotEmpty (value) {
+        let valid = false;
+        
+        if (value.length > 0) {
+          valid = true;
+        }
+    
+        return valid;
+    }
+})();
 
 // Please refer to the "Required Tasks in the assignments PDF"
 
