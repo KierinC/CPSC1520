@@ -1,6 +1,6 @@
 // wrap everything in an IIFE
 (function () {
-    const USER = 'Your name';
+    const USER = 'Kierin Wanless';
     let formElement = document.querySelector('#cheep-form');
     let listElement = document.querySelector('.cheep-list');
 
@@ -13,8 +13,8 @@
         let cheeptextElement = evt.target.elements['cheep-text'];
         let cheepgifElement = evt.target.elements['cheep-gif'];
 
-        let cheeptextValue = evt.target.elements['cheep-text'].value;
-        let cheepgifValue = evt.target.elements['cheep-gif'].value;
+        let cheeptextValue = cheeptextElement.value;
+        let cheepgifValue = cheepgifElement.value;
 
          // form validation
         let isFormValid = true;
@@ -26,6 +26,14 @@
         } else {
           cheeptextElement.classList.remove("is-invalid");
         }
+
+        if (!isGifSelected(cheepgifValue)) {
+            isFormValid = false;
+  
+            cheepgifElement.classList.add("is-invalid");
+          } else {
+            cheepgifElement.classList.remove("is-invalid");
+          }
 
         if (isFormValid) {
             // Add item to list
@@ -54,7 +62,7 @@
     function isGifSelected (value) {
         let valid = false;
 
-        if (value.lenth > 0) {
+        if (value !== "") {
             valid = true;
         }
 
@@ -65,11 +73,11 @@
     function AddCheep(text, gif) {
         let oldContent = listElement.innerHTML;
 
-        listElement = `<li class="text-center list-group-item list-group-item-action" aria-current="true">
+        listElement.innerHTML = `<li class="text-center list-group-item list-group-item-action" aria-current="true">
         <p>Author: ${USER}</p>
         <div class="row h-100">
             <div class="col-sm">
-                <img src="${gif}" class="rounded float-start" alt="CHEEP GIF HERE">    
+                <img src="img/${gif}" class="rounded float-start" alt="CHEEP GIF HERE">    
             </div>
             <div class="col-sm h-100">
                 <h5 class="mb-1">${text}</5>
