@@ -3,9 +3,24 @@
     const USER = 'Kierin Wanless';
     let formElement = document.querySelector('#cheep-form');
     let listElement = document.querySelector('.cheep-list');
+    let inputElement = document.querySelector('.form-control');
+    let selectElement = document.querySelector('.form-select');
 
+    console.log(formElement.elements['cheep-text']);
+    console.log(inputElement);
+    console.log(selectElement);
+    
     // focus on first element on page load
     formElement.elements['cheep-text'].focus();
+
+    inputElement.addEventListener('onkeydown', () => {
+        inputElement.classList.remove("is-invalid");
+        console.log("Input event")
+
+        // if (!isTextNotEmpty(inputElement.value)) {
+        //     cheeptextElement.classList.add("is-invalid");
+        // }
+    });
 
     formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
@@ -16,7 +31,10 @@
         let cheeptextValue = cheeptextElement.value;
         let cheepgifValue = cheepgifElement.value;
 
-         // form validation
+        console.log(cheeptextElement);
+        console.log(cheepgifElement);
+
+        // form validation
         let isFormValid = true;
 
         if (!isTextNotEmpty(cheeptextValue)) {
@@ -48,7 +66,7 @@
     });
 
     // function to determine if field is not empty
-    function isTextNotEmpty (value) {
+    function isTextNotEmpty(value) {
         let valid = false;
         
         if (value.length > 0 && value.length < 50) {
@@ -59,7 +77,7 @@
     }
 
     // function to determine if a gif is selected
-    function isGifSelected (value) {
+    function isGifSelected(value) {
         let valid = false;
 
         if (value !== "") {
@@ -67,6 +85,18 @@
         }
 
         return valid;
+    }
+
+    function Validate() {
+        let isFormValid = true;
+
+        if (isTextNotEmpty()) {
+            isFormValid = false;
+        }
+
+        if (isGifSelected()) {
+            isFormValid = false;
+        }
     }
 
     // function to add a cheep
