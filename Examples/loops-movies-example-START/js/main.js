@@ -29,7 +29,7 @@
 
     function filterItems(filterValue) {
         let lowCaseFilterValue = filterValue.toLowerCase();
-        
+
         for (let i = 0; i < allMovieItems.length; i++) {
             let lowCaseMovieTitle = allMovieItems[i].innerText.toLowerCase();
 
