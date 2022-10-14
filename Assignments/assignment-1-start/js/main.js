@@ -5,23 +5,21 @@
     let listElement = document.querySelector('.cheep-list');
     let inputElement = document.querySelector('.form-control');
     let selectElement = document.querySelector('.form-select');
-
-    console.log(formElement.elements['cheep-text']);
-    console.log(inputElement);
-    console.log(selectElement);
     
     // focus on first element on page load
     formElement.elements['cheep-text'].focus();
 
-    inputElement.addEventListener('onkeydown', () => {
+    // bonus: remove 'is-invalid' class from input element
+    inputElement.addEventListener('input', () => {
         inputElement.classList.remove("is-invalid");
-        console.log("Input event")
-
-        // if (!isTextNotEmpty(inputElement.value)) {
-        //     cheeptextElement.classList.add("is-invalid");
-        // }
     });
 
+    // bonus: remove 'is-invalid' class from select element
+    selectElement.addEventListener('change', () => {
+        selectElement.classList.remove("is-invalid");
+    });
+
+    // add event to look for submit and validate user input
     formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
@@ -30,9 +28,6 @@
 
         let cheeptextValue = cheeptextElement.value;
         let cheepgifValue = cheepgifElement.value;
-
-        console.log(cheeptextElement);
-        console.log(cheepgifElement);
 
         // form validation
         let isFormValid = true;
@@ -85,18 +80,6 @@
         }
 
         return valid;
-    }
-
-    function Validate() {
-        let isFormValid = true;
-
-        if (isTextNotEmpty()) {
-            isFormValid = false;
-        }
-
-        if (isGifSelected()) {
-            isFormValid = false;
-        }
     }
 
     // function to add a cheep
