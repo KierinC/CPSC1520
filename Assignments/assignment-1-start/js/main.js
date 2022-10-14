@@ -9,12 +9,14 @@
     // focus on first element on page load
     formElement.elements['cheep-text'].focus();
 
-    // bonus: remove 'is-invalid' class from input element
+    // bonus: look for change in input,
+    // remove 'is-invalid' class from input element
     inputElement.addEventListener('input', () => {
         inputElement.classList.remove("is-invalid");
     });
 
-    // bonus: remove 'is-invalid' class from select element
+    // bonus: look for change in select
+    // remove 'is-invalid' class from select element
     selectElement.addEventListener('change', () => {
         selectElement.classList.remove("is-invalid");
     });
