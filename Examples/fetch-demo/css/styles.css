@@ -1,4 +1,21 @@
+/* 
+colors:
+#E7F6F2
+#A5C9CA
+#395B64
+#2C3333
+
+*/
+
 body {
-    background-color: #000;
-    color: #fff;
+    background-color: #2C3333;
+    color: #E7F6F2;
+}
+
+.text-output {
+    color: #A5C9CA;
+}
+
+.json-output {
+    color: #395B64;
 }
