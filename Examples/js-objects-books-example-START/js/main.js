@@ -39,18 +39,55 @@ Sample object in the array of books returned from getAllBooks:
 
 (function () {
   let rowsElement = document.querySelector('#book-rows');
-  let filterForm = document.querySelector('#books-filter-form');
+  // let filterForm = document.querySelector('#books-filter-form');
   let authorSelect = document.querySelector('#author-select');
+  let inputElement = document.querySelector('.form-control');
   let allBooks = getAllBooks();
 
   renderBooks(allBooks);
   renderAuthorOptions(getAuthors(allBooks));
 
+  /*
   filterForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    let queryValue = evt.target.elements['filter-query'].value.trim();
-    let authorValue = evt.target.elements['author'].value;
+    let queryValue = inputElement.value.trim();
+    let authorValue = authorSelect.value;
+
+    let theBooks = allBooks;
+
+    if (queryValue !== '') {
+      theBooks = getBooksFilter(queryValue, 'title', allBooks);
+    }
+    
+    if (authorValue !== '') {
+      theBooks = getBooksFilter(authorValue, 'author', allBooks);
+    }
+
+    renderBooks(theBooks);
+  });
+  */
+
+  inputElement.addEventListener('input', () => {
+    let queryValue = inputElement.value.trim();
+    let authorValue = authorSelect.value;
+
+    let theBooks = allBooks;
+
+    if (queryValue !== '') {
+      theBooks = getBooksFilter(queryValue, 'title', allBooks);
+    }
+    
+    if (authorValue !== '') {
+      theBooks = getBooksFilter(authorValue, 'author', allBooks);
+    }
+
+    renderBooks(theBooks);
+  });
+
+  authorSelect.addEventListener('change', () => {
+    let queryValue = inputElement.value.trim();
+    let authorValue = authorSelect.value;
 
     let theBooks = allBooks;
 
@@ -73,8 +110,8 @@ Sample object in the array of books returned from getAllBooks:
   }
 
   function renderAuthorOptions(authors) {
-    authors.forEach((author, idx) => {
-      authorSelect.innerHTML += `<option value="${idx}">${author}</option>`;
+    authors.forEach(author => {
+      authorSelect.innerHTML += `<option value="${author}">${author}</option>`;
     });
   }
   
