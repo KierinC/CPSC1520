@@ -10,3 +10,23 @@ In this example we're going to generate random pictures of dogs.
 4. Call the get random dog function in your event listener,
     and call it when the page loads.
 */
+(function () {
+    let dogButton = document.querySelector('#new-dog-button');
+    let dogImage = document.querySelector('.dog-image');
+
+    dogButton.addEventListener('click', () => {
+        getRandomDog(setDogImage);
+    });
+
+    function setDogImage(dogInfo) {
+        dogImage.setAttribute('src', dogInfo.message);
+    }
+
+    function getRandomDog(callback) {
+        fetch('https://dog.ceo/api/breeds/image/random')
+        .then((res) => res.json())
+        .then((dogInfo) => {
+            callback(dogInfo);
+    });
+    }
+})();
