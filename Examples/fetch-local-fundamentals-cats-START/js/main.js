@@ -11,3 +11,20 @@ Sample HTML
         </div>
     </div>
 */
+(function () {
+    let catDisplay = document.querySelector('.cat-display');
+
+    fetch('data/cats-with-jobs.json')
+    .then((res) => res.json())
+    .then((cats) => {
+        cats.forEach(cat => {
+            catDisplay.innerHTML += `<div class="mt-3 card" >
+            <img class="card-img-top" src="${cat.picture}" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">${cat.name}</h5>
+            <p class="card-text">${cat.text}</p>
+            </div>
+        </div>`;
+        });
+    });
+})();
