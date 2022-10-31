@@ -1,14 +1,50 @@
 /*
 HTML for table rows.
-<tr>
-    <td>TITLE HERE</td>
-    <td>AUTHOR HERE</td>
-    <td>DATE HERE</td>
-    <td><a href="LINK HERE">view talk</a></td>
-    <td>VIEWS HERE</td>
-    <td>LIKES HERE</td>
-</tr>
+rowsElement.innerHTML += `<tr>
+            <td>${tedTalk.title}</td>
+            <td>${tedTalk.author}</td>
+            <td>${tedTalk.date}</td>
+            <td><a href="${tedTalk.link}">view talk</a></td>
+            <td>${tedTalk.views}</td>
+            <td>${tedTalk.likes}</td>
+        </tr>`;
 
 */
 
-let allTedTalks = [];
+(function () {
+    let rowsElement = document.querySelector('#ted-talk-rows');
+    let formElement = document.querySelector('#ted-talk-filter');
+    let textElement = formElement.elements['search-query'];
+    let numberElement = formElement.elements['min-views'];
+    let textValue = textElement.value;
+    let numberValue = numberElement.value;
+    let allTedTalks = [];
+
+    getTedTalks();
+    renderTedTalks(allTedTalks);
+
+    formElement.addEventListener('click', (evt) => {
+        evt.preventDefault();
+    });
+
+    function getTedTalks() {
+        fetch('data/ted_talks.json')
+        .then((res) => res.json())
+        .then((tedtalks) => allTedTalks = tedtalks);
+    }
+
+    function renderTedTalks(tedTalks) {
+        rowsElement.innerHTML = '';
+        
+        tedTalks.forEach((tedTalk) => {
+            rowsElement.innerHTML += `<tr>
+            <td>${tedTalk.title}</td>
+            <td>${tedTalk.author}</td>
+            <td>${tedTalk.date}</td>
+            <td><a href="${tedTalk.link}">view talk</a></td>
+            <td>${tedTalk.views}</td>
+            <td>${tedTalk.likes}</td>
+            </tr>`;
+        });
+    }
+})();
