@@ -20,17 +20,19 @@ rowsElement.innerHTML += `<tr>
     let numberValue = numberElement.value;
     let allTedTalks = [];
 
-    getTedTalks();
-    renderTedTalks(allTedTalks);
+    getTedTalks(renderTedTalks);
 
-    formElement.addEventListener('click', (evt) => {
+    formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
     });
 
-    function getTedTalks() {
+    function getTedTalks(callback) {
         fetch('data/ted_talks.json')
         .then((res) => res.json())
-        .then((tedtalks) => allTedTalks = tedtalks);
+        .then((tedtalks) => {
+            allTedTalks = tedtalks;
+            callback(allTedTalks);
+        });
     }
 
     function renderTedTalks(tedTalks) {
