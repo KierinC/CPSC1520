@@ -36,7 +36,7 @@ rowsElement.innerHTML += `<tr>
             thetalks = viewsFilter(numberValue, thetalks);
         }
 
-        console.log(thetalks);
+        // console.log(thetalks);
       
         renderTedTalks(thetalks);
     });
