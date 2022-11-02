@@ -11,28 +11,55 @@ rowsElement.innerHTML += `<tr>
 
 */
 
-(function () {
+(async function () {
     let rowsElement = document.querySelector('#ted-talk-rows');
     let formElement = document.querySelector('#ted-talk-filter');
     let textElement = formElement.elements['search-query'];
     let numberElement = formElement.elements['min-views'];
-    let textValue = textElement.value;
-    let numberValue = numberElement.value;
-    let allTedTalks = [];
+    let allTedTalks = await getTedTalks();
 
-    getTedTalks(renderTedTalks);
+    renderTedTalks(allTedTalks);
 
     formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
+
+        let textValue = textElement.value.trim();
+        let numberValue = numberElement.value;
+
+        thetalks = allTedTalks;
+
+        if (textValue !== '') {
+            thetalks = textFilter(textValue, thetalks);
+        }
+        
+        if (numberValue !== '') {
+            thetalks = viewsFilter(numberValue, thetalks);
+        }
+
+        console.log(thetalks);
+      
+        renderTedTalks(thetalks);
     });
 
-    function getTedTalks(callback) {
-        fetch('data/ted_talks.json')
-        .then((res) => res.json())
-        .then((tedtalks) => {
-            allTedTalks = tedtalks;
-            callback(allTedTalks);
+    function textFilter(text, tedtalks) {
+        text = text.toLowerCase();
+        return tedtalks.filter(tedtalk => {
+            return tedtalk.title.toLowerCase().includes(text);
         });
+    }
+
+    function viewsFilter(views, tedtalks) {
+        return tedtalks.filter(tedtalk => {
+            if (tedtalk.views >= views) {
+                return tedtalk;
+            }
+        });
+    }
+
+    async function getTedTalks() {
+        let response = await fetch('data/ted_talks.json');
+        let tedtalks = await response.json();
+        return tedtalks;
     }
 
     function renderTedTalks(tedTalks) {
