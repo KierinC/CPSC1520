@@ -16,9 +16,17 @@ rowsElement.innerHTML += `<tr>
     let formElement = document.querySelector('#ted-talk-filter');
     let textElement = formElement.elements['search-query'];
     let numberElement = formElement.elements['min-views'];
+    let columnsElement = document.querySelector('#ted-talk-columns');
     let allTedTalks = await getTedTalks();
 
     renderTedTalks(allTedTalks);
+
+    columnsElement.addEventListener('click', (evt) => {
+        // TODO: get element to sort by
+        // use the element to sort the array before rendering
+
+        renderTedTalks(allTedTalks);
+    });
 
     formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
