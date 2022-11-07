@@ -22,10 +22,11 @@ rowsElement.innerHTML += `<tr>
     renderTedTalks(allTedTalks);
 
     columnsElement.addEventListener('click', (evt) => {
+        thetalks = allTedTalks;
         // TODO: get element to sort by
         // use the element to sort the array before rendering
 
-        renderTedTalks(allTedTalks);
+        renderTedTalks(thetalks);
     });
 
     formElement.addEventListener('submit', (evt) => {

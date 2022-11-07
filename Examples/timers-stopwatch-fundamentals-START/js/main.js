@@ -23,3 +23,6 @@ Timer Fundamentals
 
 8. On the add lap event listener call the function above.
 */
+(function () {
+
+})();
