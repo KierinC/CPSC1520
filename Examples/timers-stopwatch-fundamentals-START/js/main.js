@@ -23,6 +23,71 @@ Timer Fundamentals
 
 8. On the add lap event listener call the function above.
 */
-(function () {
 
-})();
+let stopBtn = document.querySelector('.stop');
+let startBtn = document.querySelector('.start');
+let lapBtn = document.querySelector('.lap');
+let resetBtn = document.querySelector('.reset');
+let timerSeconds = document.querySelector('.timer-value');
+let allLaps = document.querySelector('.all-laps');
+
+let timerInterval;
+let currentTime = 0;
+let currentLap = 1;
+let lastLaptime = 0;
+let isStopWatchRunning = false;
+
+startBtn.addEventListener('click', () => {
+    if (!isStopWatchRunning) {
+        startTimer();
+    }
+});
+
+stopBtn.addEventListener('click', () => {
+    if (isStopWatchRunning) {
+        clearInterval(timerInterval);
+        isStopWatchRunning = false;
+    }
+});
+
+lapBtn.addEventListener('click', () => {
+    let lapTime = getReadableTIme(currentTime - lastLaptime);
+
+    allLaps.innerHTML += `<li class="list-group-item">Lap ${currentLap}: ${lapTime}</li>`;
+
+    currentLap++;
+    lastLaptime = currentTime;
+});
+
+resetBtn.addEventListener('click', () => {
+    reset();
+})
+
+
+function getReadableTIme(time) {
+    return `${Math.floor(time / 100)}:${time % 100}`
+}
+
+function setTimer(time) {
+    timerSeconds.innerHTML = getReadableTIme(time);
+}
+
+function startTimer() {
+    isStopWatchRunning = true;
+    timerInterval = setInterval(
+        () => {
+            currentTime += 1;
+            setTimer(currentTime);
+        }, 10
+    );
+}
+
+function reset() {
+    clearInterval(timerInterval);
+    currentTime = 0;
+    currentLap = 1;
+    lastLaptime = 0;
+    isStopWatchRunning = false;
+    allLaps.innerHTML = '';
+    timerSeconds.innerHTML = '0:00';
+}
