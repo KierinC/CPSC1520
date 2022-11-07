@@ -18,13 +18,35 @@ rowsElement.innerHTML += `<tr>
     let numberElement = formElement.elements['min-views'];
     let columnsElement = document.querySelector('#ted-talk-columns');
     let allTedTalks = await getTedTalks();
+    let modifiedTalks = allTedTalks;
 
     renderTedTalks(allTedTalks);
 
     columnsElement.addEventListener('click', (evt) => {
-        thetalks = allTedTalks;
+        thetalks = modifiedTalks;
         // TODO: get element to sort by
+        let target = evt.target.innerText;
+        console.log(target);
         // use the element to sort the array before rendering
+        modifiedTalks.sort((a, b) => {
+            // console.log(typeof a[target]);
+            // check if variable is string or not
+            if (typeof a[target] === 'string') {
+                const nameA = a[target].toUpperCase(); // ignore upper and lowercase
+                const nameB = b[target].toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+            
+                // names must be equal
+                return 0;
+            } else {
+                return a[target] - b[target];
+            }
+          });
 
         renderTedTalks(thetalks);
     });
@@ -45,8 +67,7 @@ rowsElement.innerHTML += `<tr>
             thetalks = viewsFilter(numberValue, thetalks);
         }
 
-        // console.log(thetalks);
-      
+        modifiedTalks = thetalks;
         renderTedTalks(thetalks);
     });
 
