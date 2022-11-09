@@ -24,12 +24,10 @@ rowsElement.innerHTML += `<tr>
 
     columnsElement.addEventListener('click', (evt) => {
         thetalks = modifiedTalks;
-        // TODO: get element to sort by
+        // get element to sort by
         let target = evt.target.innerText;
-        console.log(target);
         // use the element to sort the array before rendering
         modifiedTalks.sort((a, b) => {
-            // console.log(typeof a[target]);
             // check if variable is string or not
             if (typeof a[target] === 'string') {
                 const nameA = a[target].toUpperCase(); // ignore upper and lowercase
@@ -96,14 +94,35 @@ rowsElement.innerHTML += `<tr>
         rowsElement.innerHTML = '';
         
         tedTalks.forEach((tedTalk) => {
-            rowsElement.innerHTML += `<tr>
-            <td>${tedTalk.title}</td>
-            <td>${tedTalk.author}</td>
-            <td>${tedTalk.date}</td>
-            <td><a href="${tedTalk.link}">view talk</a></td>
-            <td>${tedTalk.views}</td>
-            <td>${tedTalk.likes}</td>
-            </tr>`;
+            let tr = document.createElement('tr');
+
+            let title = document.createElement('td');
+            title.appendChild(document.createTextNode(`${tedTalk.title}`));
+
+            let author = document.createElement('td');
+            author.appendChild(document.createTextNode(`${tedTalk.author}`));
+
+            let date = document.createElement('td');
+            date.appendChild(document.createTextNode(`${tedTalk.date}`));
+
+            let link = document.createElement('a');
+            link.setAttribute('href', `${tedTalk.link}`);
+            link.appendChild(document.createTextNode('view talk'));
+
+            let views = document.createElement('td');
+            views.appendChild(document.createTextNode(`${tedTalk.views}`));
+
+            let likes = document.createElement('td');
+            likes.appendChild(document.createTextNode(`${tedTalk.likes}`));
+            
+            tr.appendChild(title);
+            tr.appendChild(author);
+            tr.appendChild(date);
+            tr.appendChild(link);
+            tr.appendChild(views);
+            tr.appendChild(likes);
+
+            rowsElement.appendChild(tr);
         });
     }
 })();
