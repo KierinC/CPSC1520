@@ -53,7 +53,14 @@ stopBtn.addEventListener('click', () => {
 lapBtn.addEventListener('click', () => {
     let lapTime = getReadableTIme(currentTime - lastLaptime);
 
-    allLaps.innerHTML += `<li class="list-group-item">Lap ${currentLap}: ${lapTime}</li>`;
+    //allLaps.innerHTML += `<li class="list-group-item">Lap ${currentLap}: ${lapTime}</li>`;
+
+    let li = document.createElement('li');
+    li.classList.add('list-group-item');
+    let text = document.createTextNode(`Lap ${currentLap}: ${lapTime}`);
+    li.appendChild(text);
+
+    allLaps.appendChild(li);
 
     currentLap++;
     lastLaptime = currentTime;
@@ -69,7 +76,8 @@ function getReadableTIme(time) {
 }
 
 function setTimer(time) {
-    timerSeconds.innerHTML = getReadableTIme(time);
+    let text = document.createTextNode(getReadableTIme(time))
+    timerSeconds.replaceChild(text, timerSeconds.firstChild);
 }
 
 function startTimer() {
