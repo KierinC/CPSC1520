@@ -25,6 +25,8 @@
 # Directories #
 ###############
 node_modules/
+.parcel-cache/
+dist/
 
 # Logs and databases #
 ######################
