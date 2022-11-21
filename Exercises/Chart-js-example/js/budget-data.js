@@ -1,0 +1,1 @@
+export const budget = [1100, 400, 300, 250, 500];
