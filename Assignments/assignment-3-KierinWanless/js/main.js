@@ -14,13 +14,15 @@ dictSearch.addEventListener('submit', (evt) => {
   let word = wordInput.value;
 
   getWord(word).then(data => {
-    // console.log(data.meanings[0].definitions[0].definition);
+    console.log(data.phonetics[0].audio);
     createWordItem(data);
   });
 });
 
 srchWords.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('btn')) {
-    faveWords.appendChild(evt.target.parentNode);
+    let fave = evt.target.parentNode;
+    fave.removeChild(evt.target);
+    faveWords.appendChild(fave);
   }
 });

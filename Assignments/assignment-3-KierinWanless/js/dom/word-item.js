@@ -22,6 +22,8 @@ export function createWordItem(wordData) {
   let li = document.createElement('li');
   let div = document.createElement('div');
   let div2 = document.createElement('div');
+  let audio = document.createElement('audio');
+  let source = document.createElement('source');
   let p = document.createElement('p');
   let button = document.createElement('button');
 
@@ -32,7 +34,14 @@ export function createWordItem(wordData) {
 
   let word = document.createTextNode(`${wordData.word}`);
   let definition = document.createTextNode(`${wordData.meanings[0].definitions[0].definition}`);
+  // let src = document.createTextNode(`${wordData.phonetics[0].audio}`);
+  // let type = document.createTextNode('audio/mp3');
   let faves = document.createTextNode('Add To Favourites');
+
+  // audio.setAttribute('controls');
+  source.setAttribute('src', `${wordData.phonetics[0].audio}`);
+  source.setAttribute('type', 'audio/mp3')
+  audio.appendChild(source);
 
   div2.appendChild(word);
   p.appendChild(definition);
@@ -40,6 +49,7 @@ export function createWordItem(wordData) {
   div.appendChild(p);
   button.appendChild(faves);
   li.appendChild(div);
+  li.appendChild(audio);
   li.appendChild(button)
 
   searchedWords.appendChild(li);
