@@ -44,7 +44,7 @@ export function createWordItem(wordData) {
   button.appendChild(faves);
   li.appendChild(div);
   li.appendChild(audio);
-  li.appendChild(button)
+  li.appendChild(button);
 
   searchedWords.appendChild(li);
 }
