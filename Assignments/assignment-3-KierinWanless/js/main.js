@@ -14,7 +14,7 @@ dictSearch.addEventListener('submit', (evt) => {
   let word = wordInput.value;
 
   getWord(word).then(data => {
-    console.log(data.phonetics[0].audio);
+    // console.log(data.phonetics[0].audio);
     createWordItem(data);
   });
 });
