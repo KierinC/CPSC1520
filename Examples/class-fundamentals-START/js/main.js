@@ -36,6 +36,7 @@ as an object.
 
 // import our bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Card} from './utils/card';
 
 // render the following stickies as Cards
 const stickies = [
@@ -58,7 +59,7 @@ const stickies = [
 ];
 
 stickies.forEach((stickyDetail) => {
-  // create new cards
+  new Card(stickyDetail);
 });
 
 const newTopicForm = document.querySelector('#new-topic-form');
@@ -68,7 +69,9 @@ newTopicForm.addEventListener('submit', (event) => {
 
   const titleElement = event.target.elements['title'];
   const descriptionElement = event.target.elements['description'];
-  // create new cards
+
+  new Card({title: titleElement.value, description: descriptionElement.value});
+
   titleElement.value = '';
   descriptionElement.value = '';
 });
